@@ -23,6 +23,7 @@ RUN apk --no-cache add ca-certificates
 RUN apk --no-cache --virtual .openssh add openssh \
     && mkdir -p /etc/ssh \
     && ssh-keyscan -t rsa github.com > /etc/ssh/ssh_known_hosts \
+    && ssh-keyscan -t rsa gitlab.com >> /etc/ssh/ssh_known_hosts \
     && apk del .openssh
 
 COPY --from=builder /go/src/github.com/WanderaOrg/git2kube/bin/git2kube /app/git2kube
